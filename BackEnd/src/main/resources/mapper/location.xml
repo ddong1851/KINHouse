@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.model.mapper.LocationMapper">
+
+	<select id="getList" resultType="AptDongJibun">
+		select apt_code, apt_dong_ga, apt_jibun
+		from aptinfo;
+	</select>
+	
+	<insert id="register" parameterType="AptWithLatLng">
+		insert into aptlatlng (apt_code, lat, lng)
+		values (#{apt_code}, #{lat}, #{lng});
+	</insert>
+	
+	<select id="getNearApt" parameterType="map" resultType="AptNameLocationCon">
+		select a.apt_name, b.lat, b.lng, a.apt_dong_ga, a.apt_jibun, apt_con_year
+		from aptinfo a join aptlatlng b
+		on (a.apt_code = b.apt_code)
+		order by (abs(#{lat}-b.lat)+abs(#{lng}-b.lng)) limit 3;
+	</select>
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.model.mapper.QnaMapper">
+
+	<select id="getlist" resultType="Map">
+		select * from qna
+	</select>
+	
+	<insert id="register" parameterType="Qna">
+		insert into qna (userid, title, content)
+		values ( #{userid}, #{title}, #{content})
+	</insert>
+	
+	<select id="selectItem" parameterType="int" resultType="Qna">
+		select * from qna 
+		where no = #{no}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from qna 
+		where no = #{no}
+	</delete>
+	
+	<update id="modify" parameterType="Qna">
+		update qna 
+		set title = #{title},
+		content = #{content}
+		where no = #{no}
+	</update>
+	
+	<update id="updateHits" parameterType="int">
+		update qna
+		set hits = hits + 1
+		where no = #{no}
+	</update>
+	
+	<delete id="deleteReplys" parameterType="int">
+		delete from qna_reply
+		where qna_no = #{no}
+	</delete>
+
+</mapper>	

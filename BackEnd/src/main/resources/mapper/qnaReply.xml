@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.model.mapper.QnaReplyMapper">
+
+	<insert id="submit" parameterType="Qna_reply">
+		insert into qna_reply (qna_no, author, content)
+		values(#{qna_no}, #{author}, #{content})
+	</insert>
+	
+	<select id="getList" parameterType="int" resultType="map">
+		select no, author, content, regtime
+		from qna_reply
+		where qna_no = #{qna_no}
+		order by regtime asc
+	</select>
+	
+	<delete id="deleteItem" parameterType="int">
+		delete from qna_reply
+		where no = #{no}
+	</delete>
+	
+	<update id="modifyItem" parameterType="map">
+		update qna_reply
+		set content = #{content}
+		where no = #{no}
+	</update>
+	
+</mapper>

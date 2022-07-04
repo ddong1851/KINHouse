@@ -1,0 +1,160 @@
+.main-dashboard{
+	width: 100%;
+	padding: 20px;
+}
+
+.main-dashboard-top{
+	width: 100%;	
+	height: 30px;
+	line-height: 30px;
+}
+
+.main-dashboard-regist{
+	cursor: pointer;
+	background-color: #fc955c;
+	font-size: 18px;
+	width: 100px;
+	float:right;
+	text-align: center;
+}
+
+.main-dashboard-table{
+	margin-top:10px;
+	text-align: left;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.main-dashboard-table-header{
+	width:100%;
+	height:30px;
+	line-height:30px;
+	padding:5px;
+	background-color: #d2d2d2;
+	font-weight: 400;
+	font-size: 15px;
+}
+
+.main-dashboard-table th:nth-child(1) {
+	text-align: center;
+	width: 16.6%;
+}
+
+.main-dashboard-table th:nth-child(2) {
+	text-align: center;
+	width: 33.3%;
+}
+
+.main-dashboard-table th:nth-child(3) {
+	text-align: center;
+	width: 16.6%;
+}
+
+.main-dashboard-table th:nth-child(4) {
+	text-align: center;
+	width: 33.3%;
+}
+
+.main-dashboard-table-tr{
+	width:100%;
+	height: 100px;
+	line-height: 100px;
+	border-bottom: 1px solid #DDD;
+}
+
+.main-dashboard-table-tr td:nth-child(1) {
+	text-align: center;
+	width: 16.6%;
+}
+
+.main-dashboard-table-tr td:nth-child(2) {
+	text-align: center;
+	width: 33.3%;
+}
+
+.main-dashboard-table-tr td:nth-child(3) {
+	text-align: center;
+	width: 25%;
+}
+
+.main-dashboard-table-tr td:nth-child(4) {
+	text-align: center;
+	width: 25%;
+}
+
+.button-look{
+	font-size: 15px;
+	width: 60px;
+	height: 40px;
+	line-height: 40px;
+	background-color: #ff8040;
+	border: none;
+	cursor: pointer;
+}
+
+.main-container-board {
+	text-decoration: none;
+	width:600px;
+	height: 600px;
+	margin: auto;
+	padding:10px;
+}
+
+.main-container-content{
+	text-align: center;
+	width: 100%;
+	margin: auto;
+}
+
+.dash-form{
+	position: relative;
+	z-index: 1;
+	background: #ffffff;
+	max-width: 500px;
+	margin: 0 auto 50px;
+	height: 500px;
+	text-align: center;
+}
+
+#title {
+	font-family: "Roboto", sans-serif;
+	outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+textarea {
+	font-family: "Roboto", sans-serif;
+	outline: 0;
+    background: #f2f2f2;
+    height:300px;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+#dashboard-submit{
+	margin: 0 0 15px;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: skyblue;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+

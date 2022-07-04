@@ -1,0 +1,427 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* start header*/
+.header {
+	height: 100px;
+	width: 100%;
+}
+
+.nav-login{
+	width: 100%;
+	height: 30px;
+	background-color: #363636;
+}
+
+.nav-login-menu{
+	float: right;
+}
+
+.nav-login-menu-options{
+	float: left;
+	margin-right:20px;
+	color: white;
+	line-height: 30px;
+	cursor: pointer;
+}
+
+.nav-menu{
+	float :left;
+	height: 70px;
+	width: 100%;
+}
+
+.nav-menu-contaniner{
+	display:inline-block;
+	width: auto;
+	height: 70px;
+	float:right;
+	line-height: 70px;
+}
+
+.nav-menu-logo {
+	line-height: 70px;
+	height: 70px;
+	cursor: pointer;
+}
+
+.nav-menu-option{
+	float:left;
+	margin-right: 10px;
+}
+
+#search-form{
+	display: none;
+}
+
+.nav-menu-search{
+	float:right;
+	cursor: pointer;
+}
+/* end of header*/
+
+/* start main-content*/
+.main-content{
+	width: 100%;
+}
+
+/* start main top*/
+.main-top{
+	height: auto;
+}
+
+.main-top-intro {
+	height: 300px;
+	background-image: url("https://cdn.imweb.me/thumbnail/20191030/b1e9397e45b1b.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	position: relative;
+}
+
+.main-top-intro-section{
+	height:150px;
+	text-align: center;
+	color:white;
+}
+
+.top-intro-section-top{
+	box-shadow: 0px 1px 10px rgba(255, 255, 255, 0.3);
+	vertical-align: bottom;
+}
+
+/* start main-top-setting*/
+.main-top-setting{
+	height: 100px;
+	width: 100%;
+	background-color: #363636;
+}
+
+.main-top-setting-container{
+	display: flex;
+	height: 30px;
+	flex-flow: row nowrap;
+	justify-content: center;
+}
+
+.dropdown{
+	position:relative;
+	display:inline-block;
+	margin:3px;
+	float: left;	
+	width:100px;
+	text-align:center;
+	color:#e3e3e3;
+	background-color: #6b6b6b;
+}
+
+.dropdown-menu1, .dropdown-menu2, .dropdown-menu3{
+	display: none;
+	width:100px;
+	position: absolute;
+	text-align:center;
+	background-color: #f9f9f9;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+ 	z-index: 1;
+}
+
+.dropdown:hover .dropdown-menu1 {
+	display: block;	
+	cursor: pointer;
+}
+
+.dropdown:hover .dropdown-menu2 {
+	display: block;	
+	cursor: pointer;
+}
+
+.dropdown:hover .dropdown-menu3 {
+	display: block;	
+	cursor: pointer;
+}
+
+.dropdown-menu1 div {
+  margin-bottom:3px;
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu2 div {
+  color: black;
+  margin-bottom:3px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu3 div {
+  color: black;
+  margin-bottom:3px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu1 div:hover, .dropdown-menu2 div:hover, .dropdown-menu3 div:hover {
+	background-color: #b5b5b5;
+}
+/* end of main=top-setting*/
+/* end of main top*/
+
+/* start main-bottom*/
+.main-bottom{
+	height:900px;
+	margin-top: 20px;
+}
+
+.main-bottom-map{
+	height: 400px;
+	text-align: center;
+}
+
+#map-image{
+	height: 350px;
+}
+
+/* start main-bottom-section*/
+.main-bottom-sections{
+	height: 350px;
+	width: 100%;
+}
+
+.main-bottom-section-article{
+	float: left;
+	width: 33.3%;
+	height: 350px;
+	padding: 10px;
+}
+
+.bottom-section1-container{
+	height: 300px;
+	width:300px;
+	background-color: #d2d2ff;
+}
+
+.bottom-section1-container-top{
+	padding:20px;
+	height: 140px;
+}
+
+.bottom-section1-container-top > div{
+	font-size: 26px;
+	font-weight: bold;
+}
+
+.bottom-section1-container-bottom{
+	padding:20px;
+	height: 160px;
+}
+
+.bottom-section1-container-bottom-text{
+	color:blue;
+	font-style: bolder;
+}
+
+#tax-logo{
+	float:right;
+	width:120px;
+}
+
+.bottom-section-article-top{
+	height: 70px;
+	width: 280px;
+	line-height: 70px;
+	border-bottom-style: groove;
+  	border-bottom-width: 3px;
+}
+
+.bottom-section-article-bottom{
+	height: 280px;
+	width: 280px;
+	border-bottom-style: groove;
+  	border-bottom-width: 3px;
+}
+
+.bottom-section-article-bottom div {
+	height:40px;
+	line-height:40px;
+	color: #d3d3d3;
+}
+
+.section3-top {
+	height: 70px;
+	width: 280px;
+	line-height: 70px;
+	border-bottom-style: groove;
+  	border-bottom-width: 3px;
+}
+
+.section3-bottom{
+	height: 280px;
+	width: 280px;
+}
+
+.section3-bottom-list-menu-option {
+	list-style: disc;
+	margin-left: 40px;
+}
+ 
+.section3-bottom-list a {
+	color:#746de4;
+}
+/* end of main-bottom*/
+/* end of main-content*/
+
+/*start footer*/
+.footer{
+	background-color: #fbfbfb;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+  	height: 120px;
+}
+
+.footer-top-content{
+	height: 100px;
+	width: 100%;
+}
+
+.footer-left{
+	float:left;
+	height: 100px;
+	width: 100px;	
+}
+
+.footer-left > img {
+	width: 70px;
+}
+
+.footer-right{
+	float:left;	
+	height: 100px;
+	width: auto;
+}
+
+.footer-right-top{
+	height: 20px;
+	widows: 100%;
+	font-size: 18px;
+}
+
+.footer-right-bottom{
+	height: 80px;
+	padding: 10px;
+}
+
+.footer-bottom-content{
+	height:20px;
+	background-color: #ececec;
+}
+
+.footer-botton-content-text{
+	text-align: center;
+}
+/* end of footer*/
+
+.main-apartsection {
+  margin: auto;
+  min-height: 100%;
+  padding-bottom: 100px;
+}
+
+.apt-info {
+  margin: 15px 10px 15px;
+  background-color: aquamarine;
+  width: 300px;
+  cursor: pointer;
+}
+.apt-name {
+  text-align: center;
+  font-weight: bold;
+}
+.main-apartsection-left {
+  margin: auto;
+  float: left;
+}
+
+.apt-img {
+  margin-top: 10px;
+  margin-right: 5vw;
+  float: right;
+  height: 70vh;
+  width: 50vw;
+}
+
+.main-content {
+  position: relative;
+  height: auto;
+  min-height: 100vh;
+  padding-bottom: 150px;
+}
+
+/* start sort dropdown */
+.link{
+    background: none;
+    border: none;
+    text-decoration: none;
+    color: black;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    padding: 0;
+}
+
+.sort-dropdown.active > .link,
+.link:hover{
+    color: black;
+}
+
+.sort-dropdown{
+    position: relative;
+}
+
+.sort-dropdown-menu{
+    position: absolute;
+    left: 0;
+    top: calc(100% + .25rem);
+    background-color: white;
+    padding: .75rem;
+    border-radius: .25rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;;
+}
+
+.sort-dropdown.active > .link + .sort-dropdown-menu{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.information-grid{
+    display: grid;
+    grid-template-columns: repeat(1, max-content);
+    gap: 2rem;
+}
+
+.sort-dropdown-links{
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+/* end sort dropdown */

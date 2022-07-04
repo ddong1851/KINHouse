@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.model.mapper.LikedAptMapper">
+
+	<resultMap type="com.ssafy.model.dto.AddLikedAptResponse" id="userLikedList">
+		<result column="aptcode" property="aptCode"/>
+	</resultMap>
+	
+	<select id="getUserLikedAptCode" parameterType="string" resultMap="userLikedList">
+		select apt_code as aptcode 
+		from liked_apt
+		where user_id=#{userid}
+	</select>
+	
+	<insert id="addlikedapt" parameterType="LikedAptRequest">
+		insert into 
+		liked_apt(user_id, apt_code, no, apartmentName)
+		values(#{userId}, #{aptCode}, #{no}, #{apartmentName})
+	</insert>
+	
+	<delete id="deletelikedapt" parameterType="map">
+		delete
+		from liked_apt
+		where user_id=#{userId}
+		and no=#{no}
+	</delete>
+	
+</mapper>

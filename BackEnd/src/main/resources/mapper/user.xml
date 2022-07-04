@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ssafy.model.mapper.UserMapper">	
+
+	<select id="login" parameterType="User" resultType="User">
+		select id, password, email, name, phone
+		from user
+		where id=#{id} and password=#{password}
+	</select>
+	
+	<update id="setLoginTime" parameterType="string">
+		update user
+		set login_log = current_timestamp()
+		where id = #{id};
+	</update>
+	
+	<insert id="register" parameterType="User">
+		insert into user(id, password, email, name, phone)
+		values(#{id}, #{password}, #{email}, #{name}, #{phone})
+	</insert>
+	
+	<select id="getUserInfo" parameterType="string" resultType="User">
+		select id, password, email, name, phone, login_log, register_log
+		from user
+		where id=#{id}
+	</select>
+	
+	<update id="modify" parameterType="User">
+		update user
+		set 
+		password = #{password},
+		email = #{email},
+		name = #{name},
+		phone = #{phone}
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from user
+		where id = #{id}
+	</delete>
+	
+	<select id="findId" parameterType="User" resultType="string">
+		select id
+		from user 
+		where email = #{email} and name = #{name}
+	</select>
+
+	<select id="findPass" parameterType="User" resultType="string">
+		select password
+		from user 
+		where email = #{email} and id = #{id}
+	</select>
+	
+	<select id="check" parameterType="map" resultType="int">
+		select count(id)
+		from user
+		<if test="key == 'email'.toString()">
+			where email = #{email}
+		</if>
+		<if test="key == 'id'.toString()">
+			where id = #{id}
+		</if>
+	</select>
+	
+	<select id="getList" resultType="map">
+		select * from user where id != "undefined" and id != "admin";
+	</select>
+	
+	<select id="getLiked" parameterType="string" resultType="map">
+	select distinct l.id, a.apartmentName, a.roadName, a.dong, a.buildYear,
+	l.no, apt_code
+	from liked_apt l join aptinfo a
+	on(apt_code = aptcode)
+	where user_id = #{id}
+	</select>
+	
+	<delete id="deleteItem" parameterType="int">
+		delete from liked_apt
+		where id = #{id}
+	</delete>
+	
+	<update id="changeUserNotice" parameterType="map">
+		update notice 
+		set id = #{to}
+		where id = #{origin}
+	</update>
+	
+	<update id="changeUserQna" parameterType="map">
+		update qna 
+		set userid = #{to}
+		where userid = #{origin}
+	</update>
+	
+	<update id="changeUserReply" parameterType="map">
+		update qna_reply 
+		set author = #{to}
+		where author = #{origin}
+	</update>
+	
+	<delete id="deleteLikedUser" parameterType="String">
+		delete from liked_apt
+		where user_id = #{id}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.model.mapper.AptInfoMapper">
+		
+	<sql id="search">
+		<choose>
+			<!-- word 쿼리 있을 시 -->
+			<when test="word != null and word != ''">
+				<choose>
+					<when test='key == "apt"'>
+						<!-- key == apt -->
+						and aif.apartmentName = #{word}
+						<include refid="sorting"></include>
+					</when>
+					<when test='key.equals("dong")'>
+						<!-- key == dong -->
+						and aif.dong = #{word}
+						<include refid="sorting"></include>
+					</when>
+				</choose>
+			</when>
+			<otherwise>
+				<!-- word 쿼리 없을 시 -->
+				<include refid="sorting"></include>
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<!-- 정렬 코드 -->
+	<sql id="sorting">
+		<choose>
+			<when test='s=="1"'>
+				<!-- 가격 내림차순 -->
+				order by adh.dealAmount desc
+			</when>
+			<when test='s=="2"'>
+				<!-- 가격 오름차순 -->
+				order by adh.dealAmount asc 
+			</when>
+			<when test='s=="3"'>
+				<!-- 건축년도 내림차순 -->
+				order by aif.buildYear desc
+			</when>
+			<when test='s=="4"'>
+				<!-- 건축년도 오름차순 -->
+				order by aif.buildYear asc
+			</when>
+		</choose>
+	</sql>
+	
+	<resultMap type="AptSearchVo" id="aptList">
+		<result column="동" property="dong"/>
+		<result column="지번" property="jibun"/>
+		<result column="아파트명" property="apartmentName"/>
+		<result column="건축년도" property="buildYear"/>
+		<result column="거래가격" property="dealAmount"/>
+		<result column="위도"	 property="lat"/>
+		<result column="경도" property="lng"/>
+		<result column="거래번호" property="no"/>
+		<result column="아파트코드" property="aptCode"/>
+	</resultMap>
+
+	<resultMap type="AptSearchIsLoginVo" id="aptListIsLogin">
+		<result column="동" property="dong"/>
+		<result column="지번" property="jibun"/>
+		<result column="아파트명" property="apartmentName"/>
+		<result column="건축년도" property="buildYear"/>
+		<result column="거래가격" property="dealAmount"/>
+		<result column="위도"	 property="lat"/>
+		<result column="경도" property="lng"/>
+		<result column="거래번호" property="no"/>
+		<result column="아파트코드" property="aptCode"/>
+		<result column="id" property="userId"/>
+		<result column="no" property="userCheckNo"/>
+	</resultMap>
+	
+	<resultMap type="AptSearchBybCodeVo" id="aptListbybcode">
+		<result column="동" property="dong"/>
+		<result column="지번" property="jibun"/>
+		<result column="아파트명" property="apartmentName"/>
+		<result column="건축년도" property="buildYear"/>
+		<result column="거래가격" property="dealAmount"/>
+		<result column="위도"	 property="lat"/>
+		<result column="경도" property="lng"/>
+		<result column="거래번호" property="no"/>
+		<result column="아파트코드" property="aptCode"/>
+		<result column="bcode" property="bcode"/>
+	</resultMap>
+
+	<resultMap type="AptSearchBybCodeIsLoginVo" id="aptListbybcodeIsLogin">
+		<result column="동" property="dong"/>
+		<result column="지번" property="jibun"/>
+		<result column="아파트명" property="apartmentName"/>
+		<result column="건축년도" property="buildYear"/>
+		<result column="거래가격" property="dealAmount"/>
+		<result column="위도"	 property="lat"/>
+		<result column="경도" property="lng"/>
+		<result column="거래번호" property="no"/>
+		<result column="아파트코드" property="aptCode"/>
+		<result column="bcode" property="bcode" />
+		<result column="id" property="userId"/>
+		<result column="no" property="userCheckNo"/>
+	</resultMap>
+
+	<!-- 아파트 검색 -->
+	<select id="searchApt" parameterType="map" resultMap="aptList">
+		select aif.dong as '동', aif.jibun as '지번', aif.apartmentName as '아파트명', aif.buildYear as '건축년도', adh.dealAmount as '거래가격', aif.lat as '위도', aif.lng as '경도', adh.no as '거래번호', aif.aptCode as '아파트코드'	
+		from aptinfo as aif, aptdeal as adh
+		where aif.aptCode = adh.aptCode
+		<include refid="search" />
+		limit #{start}, #{spp}
+	</select>
+	
+	<!-- 페이징 관련 쿼리 -->
+	<!-- 전체 갯수 반환 -->
+	<select id="getTotalCount" parameterType="map" resultType="int">
+		select count(aif.aptCode)
+		from aptinfo aif, aptdeal adh
+		where aif.aptCode = adh.aptCode
+		<include refid="search" />
+	</select>
+	
+	<!-- 아파트 갯수 반환 -->
+	<select id="getAptCount" parameterType="map" resultType="int">
+		select count(aif.aptCode)
+		from aptinfo aif, aptdeal adh
+		where aif.aptCode = adh.aptCode
+		and aif.apartmentName = #{word}
+	</select>
+	
+	<!-- 동 갯수 반환 -->
+	<select id="getDongCount" parameterType="map" resultType="int">
+		select count(aif.aptCode)
+		from aptinfo aif, aptdeal adh
+		where aif.aptCode = adh.aptCode
+		and aif.dong = #{word}
+	</select>
+	
+	<select id="searchAptIsLogin" parameterType="map" resultMap="aptListIsLogin">
+		select search.dong as '동', search.jibun as '지번', search.apartmentName as '아파트명', search.buildYear as '건축년도', search.dealAmount as '거래가격', search.lat as '위도', search.lng as '경도', search.aptCode as '아파트코드', search.no as '거래번호'
+		, liked.no as 'no', liked.user_id as 'id'
+		from (select aif.dong as dong, aif.jibun as jibun, aif.apartmentName as apartmentName, 
+		aif.buildYear as buildYear, adh.dealAmount as dealAmount, aif.lat as lat, aif.lng as lng, 
+		adh.no as no, aif.aptCode as aptCode	
+		from aptinfo as aif, aptdeal as adh
+		where aif.aptCode = adh.aptCode
+		<include refid="search" />
+		limit #{start}, #{spp}
+		) search
+		left join (select no, user_id
+			from liked_apt
+            where user_id = #{userId} ) liked
+            on search.no = liked.no;
+	</select>
+	
+	<select id="findByAddress" parameterType="map" resultMap="aptListbybcode">
+		select aif.dong as '동', aif.jibun as '지번', aif.apartmentName as '아파트명', aif.buildYear as '건축년도', adh.dealAmount as '거래가격', aif.lat as '위도', aif.lng as '경도', adh.no as '거래번호', aif.aptCode as '아파트코드' , aif.dongCode as 'bcode'
+		from aptinfo as aif, aptdeal as adh
+		where aif.aptCode = adh.aptCode
+		and aif.dongCode = #{bcode}
+		order by aif.buildYear desc
+		limit #{start}, #{spp};
+	</select>
+	
+	<select id="getTotalCountBybcode" parameterType="double" resultType="int">
+		select count(aif.aptCode)
+		from aptinfo aif, aptdeal adh
+		where aif.aptCode = adh.aptCode
+		and aif.dongCode = #{bcode};
+	</select>
+	
+	<select id="findByAddressIsLogin" parameterType="map" resultMap="aptListbybcodeIsLogin">
+		select search.dong as '동', search.jibun as '지번', search.apartmentName as '아파트명', search.buildYear as '건축년도', search.dealAmount as '거래가격', search.lat as '위도', search.lng as '경도', search.aptCode as '아파트코드', search.no as '거래번호', search.bcode as 'bcode'
+		, liked.no as 'no', liked.user_id as 'id'
+		from (select aif.dong as dong, aif.jibun as jibun, aif.apartmentName as apartmentName, aif.buildYear as buildYear, adh.dealAmount as dealAmount, aif.lat as lat, aif.lng as lng, adh.no as no, aif.aptCode as aptCode , aif.dongCode as 'bcode'
+		from aptinfo as aif, aptdeal as adh
+		where aif.aptCode = adh.aptCode
+		and aif.dongCode = #{bcode}
+		order by aif.buildYear desc
+		limit #{start}, #{spp}) search
+		left join (select no, user_id
+			from liked_apt
+            where user_id = #{id} ) liked
+            on search.no = liked.no;
+	</select>
+	
+	
+</mapper>

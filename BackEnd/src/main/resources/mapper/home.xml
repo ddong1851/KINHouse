@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.model.mapper.HomeMapper">
+
+	<select id="getLocal" parameterType="map" resultType="map">
+		select
+		distinct apartmentName, aptCode, (abs(#{lat}-lat)+abs(#{lng}-lng)) as
+		dist, dong, roadName, buildYear, FLOOR(RAND() * 10) as img_num
+		from aptinfo
+		order by dist
+		limit 12;
+	</select>
+
+	<select id="getHot" resultType="AptInfoHot">
+		select distinct liked.apartmentName, apt_code, aptinfo.dong, 
+		aptinfo.roadname, count(*) over (partition by apt_code) cnt
+		from (
+		select apartmentName, apt_code, user_id, regtime
+		from liked_apt
+		where
+		unix_timestamp(current_timestamp)-unix_timestamp(regtime) <![CDATA[ < ]]>
+		360000000
+		) liked left join aptinfo
+		on(liked.apt_code = aptinfo.aptcode)
+		order by cnt desc 
+		limit 12;
+	</select>
+
+	<select id="getRand" parameterType="int" resultType="AptInfoHot">
+		select distinct apartmentName, aptcode, dong, roadName
+		from aptinfo
+		order by rand()
+		limit #{cnt};
+	</select>
+
+</mapper>
